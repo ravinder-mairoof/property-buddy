@@ -1,0 +1,32 @@
+# Render Blueprint: New -> Blueprint, pick this repo. Disks need a paid instance type;
+# check Render's current plan names and prices and edit `plan` if needed.
+services:
+  - type: web
+    name: propertybuddy
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    numInstances: 1            # SQLite on one disk: keep this at 1
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /var/data/propertybuddy.db
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: APP_URL
+        sync: false            # e.g. https://propertybuddy.onrender.com, update after first deploy
+      - key: EPC_API_TOKEN
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PRICE_ID
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false

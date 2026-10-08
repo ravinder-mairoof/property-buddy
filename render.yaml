@@ -16,8 +16,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DB_PATH
-        value: /var/data/propertybuddy.db
+      # - key: DB_PATH
+        #value: /var/data/propertybuddy.db
       - key: SESSION_SECRET
         generateValue: true
       - key: APP_URL
